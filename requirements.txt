@@ -1,4 +1,4 @@
 streamlit
 groq
 newspaper3k
-lxml
+lxml==4.9.3
