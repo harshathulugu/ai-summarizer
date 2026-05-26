@@ -18,7 +18,9 @@ if st.button("Summarize"):
            response = requests.get(f"https://api.allorigins.win/get?url={url}", timeout=15)
             
             if response.status_code == 200:
-                soup = BeautifulSoup(response.text, 'html.parser')
+    import json
+    data = json.loads(response.text)
+    soup = BeautifulSoup(data['contents'], 'html.parser')
                 text = soup.get_text()[:3000]
                 
                 st.write("Summarizing...")
