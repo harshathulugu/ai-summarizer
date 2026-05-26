@@ -1,5 +1,11 @@
 import streamlit as st
 from groq import Groq
+
+# Safety fix: Patch lxml before importing newspaper
+import sys
+from unittest.mock import MagicMock
+sys.modules['lxml.html.clean'] = MagicMock()
+
 from newspaper import Article
 
 # Setup the client
