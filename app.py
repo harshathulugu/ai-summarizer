@@ -3,7 +3,6 @@ from groq import Groq
 import requests
 from bs4 import BeautifulSoup
 
-
 client = Groq(api_key=st.secrets["GROQ_API_KEY"])
 st.title("AI Website Summarizer")
 
