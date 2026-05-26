@@ -12,11 +12,10 @@ if st.button("Summarize"):
     if url:
         try:
             st.write("Fetching content...")
-            # Using newspaper3k to handle the website blocking
             article = Article(url)
             article.download()
             article.parse()
-            text = article.text[:3000] # Get the first 3000 chars
+            text = article.text[:3000] 
 
             st.write("Summarizing...")
             chat_completion = client.chat.completions.create(
