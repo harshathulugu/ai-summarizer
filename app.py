@@ -1,26 +1,11 @@
-import streamlit as st
-from groq import Groq
-import requests
-from bs4 import BeautifulSoup
-
-# Use the secure secret key
-client = Groq(api_key=st.secrets["GROQ_API_KEY"])
-
-st.title("AI Website Summarizer")
-url = st.text_input("Paste your URL here:")
-
-if st.button("Summarize"):
-    if url:
-        try:
+try:
             st.write("Fetching website...")
-            headers = {"User-Agent": "Mozilla/5.0"}
-            # The timeout=10 here stops it from freezing
-           response = requests.get(f"https://api.allorigins.win/get?url={url}", timeout=15)
+            response = requests.get(f"https://api.allorigins.win/get?url={url}", timeout=15)
             
             if response.status_code == 200:
-    import json
-    data = json.loads(response.text)
-    soup = BeautifulSoup(data['contents'], 'html.parser')
+                import json
+                data = json.loads(response.text)
+                soup = BeautifulSoup(data['contents'], 'html.parser')
                 text = soup.get_text()[:3000]
                 
                 st.write("Summarizing...")
@@ -30,8 +15,6 @@ if st.button("Summarize"):
                 )
                 st.write(chat_completion.choices[0].message.content)
             else:
-                st.error(f"Failed to load website. Status code: {response.status_code}")
+                st.error("Could not fetch the URL.")
         except Exception as e:
-            st.error(f"An error occurred: {e}")
-    else:
-        st.warning("Please enter a URL first.")
+            st.error(f"Error: {e}")
