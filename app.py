@@ -6,6 +6,7 @@ from groq import Groq
 
 # 1. Setup the client
 client = Groq(api_key=st.secrets["GROQ_API_KEY"])
+
 # 2. Build the Interface
 st.title("AI Website Summarizer")
 url = st.text_input("Paste your URL here:")
@@ -29,7 +30,7 @@ if st.button("Summarize"):
                 )
                 st.write(chat_completion.choices[0].message.content)
             else:
-                st.error("Could not fetch the URL.")
+                st.error("Could not fetch the URL. Check the link.")
         except Exception as e:
             st.error(f"Error: {e}")
     else:
