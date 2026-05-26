@@ -15,7 +15,7 @@ if st.button("Summarize"):
             st.write("Fetching website...")
             headers = {"User-Agent": "Mozilla/5.0"}
             # The timeout=10 here stops it from freezing
-            response = requests.get(url, headers=headers, timeout=10)
+           response = requests.get(f"https://api.allorigins.win/get?url={url}", timeout=15)
             
             if response.status_code == 200:
                 soup = BeautifulSoup(response.text, 'html.parser')
